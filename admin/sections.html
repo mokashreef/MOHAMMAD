@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعديل أقسام الموقع | لوحة التحكم</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ محمد CMS</h2>
+                <span>نظام إدارة المحتوى</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><span class="nav-icon">📊</span> الرئيسية</a>
+                <a href="projects.html"><span class="nav-icon">📁</span> المشاريع</a>
+                <a href="categories.html"><span class="nav-icon">🏷️</span> التصنيفات</a>
+                <a href="sections.html" class="active"><span class="nav-icon">📝</span> أقسام الموقع</a>
+                <a href="media.html"><span class="nav-icon">🖼️</span> الصور</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/" target="_blank" class="visit-site">🌐 زيارة الموقع</a>
+                <button class="logout-btn" onclick="logout()">🚪 تسجيل الخروج</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="main-header">
+                <h1>📝 تعديل أقسام الموقع</h1>
+                <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+            </div>
+
+            <!-- Section Tabs -->
+            <div class="section-tabs">
+                <button class="section-tab active" onclick="switchTab('hero')">🏠 قسم الترحيب</button>
+                <button class="section-tab" onclick="switchTab('about')">👤 من أنا</button>
+                <button class="section-tab" onclick="switchTab('contact')">📞 التواصل</button>
+            </div>
+
+            <!-- Hero Section Editor -->
+            <div class="section-panel active" id="panel-hero">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🏠 قسم الترحيب (Hero)</h2>
+                    </div>
+                    <form id="hero-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>العنوان (عربي) - يدعم HTML</label>
+                                <input type="text" id="hero-title">
+                            </div>
+                            <div class="form-group">
+                                <label>العنوان (English)</label>
+                                <input type="text" id="hero-titleEn">
+                            </div>
+                            <div class="form-group">
+                                <label>العنوان الفرعي (عربي)</label>
+                                <input type="text" id="hero-subtitle">
+                            </div>
+                            <div class="form-group">
+                                <label>العنوان الفرعي (English)</label>
+                                <input type="text" id="hero-subtitleEn">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>الوصف (عربي)</label>
+                                <textarea id="hero-description"></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>الوصف (English)</label>
+                                <textarea id="hero-descriptionEn"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>نص الزر الأول (عربي)</label>
+                                <input type="text" id="hero-btnPrimary">
+                            </div>
+                            <div class="form-group">
+                                <label>Button 1 Text (English)</label>
+                                <input type="text" id="hero-btnPrimaryEn">
+                            </div>
+                            <div class="form-group">
+                                <label>نص الزر الثاني (عربي)</label>
+                                <input type="text" id="hero-btnSecondary">
+                            </div>
+                            <div class="form-group">
+                                <label>Button 2 Text (English)</label>
+                                <input type="text" id="hero-btnSecondaryEn">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="saveSection('hero')">💾 حفظ التعديلات</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- About Section Editor -->
+            <div class="section-panel" id="panel-about">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>👤 قسم من أنا</h2>
+                    </div>
+                    <form id="about-form">
+                        <div class="form-group">
+                            <label>الفقرة الأولى (عربي)</label>
+                            <textarea id="about-text1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Paragraph 1 (English)</label>
+                            <textarea id="about-text1En"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>الفقرة الثانية (عربي)</label>
+                            <textarea id="about-text2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Paragraph 2 (English)</label>
+                            <textarea id="about-text2En"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>الفقرة الثالثة (عربي)</label>
+                            <textarea id="about-text3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Paragraph 3 (English)</label>
+                            <textarea id="about-text3En"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>رابط صورة البروفايل</label>
+                            <input type="text" id="about-image" placeholder="/img/me.png">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="saveSection('about')">💾 حفظ التعديلات</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contact Section Editor -->
+            <div class="section-panel" id="panel-contact">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📞 بيانات التواصل</h2>
+                    </div>
+                    <form id="contact-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>البريد الإلكتروني</label>
+                                <input type="email" id="contact-email">
+                            </div>
+                            <div class="form-group">
+                                <label>رابط واتساب</label>
+                                <input type="url" id="contact-whatsapp">
+                            </div>
+                            <div class="form-group">
+                                <label>رابط تيليجرام</label>
+                                <input type="url" id="contact-telegram">
+                            </div>
+                            <div class="form-group">
+                                <label>رابط يوتيوب</label>
+                                <input type="url" id="contact-youtube">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>رابط نموذج Formspree</label>
+                                <input type="url" id="contact-formAction">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="saveSection('contact')">💾 حفظ التعديلات</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        checkAuth();
+        loadSections();
+
+        function switchTab(tab) {
+            document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(`panel-${tab}`).classList.add('active');
+        }
+
+        async function loadSections() {
+            try {
+                const sections = await apiGet('/api/sections');
+                sections.forEach(s => {
+                    const c = s.content;
+                    if (s.key === 'hero') {
+                        setVal('hero-title', c.title);
+                        setVal('hero-titleEn', c.titleEn);
+                        setVal('hero-subtitle', c.subtitle);
+                        setVal('hero-subtitleEn', c.subtitleEn);
+                        setVal('hero-description', c.description);
+                        setVal('hero-descriptionEn', c.descriptionEn);
+                        setVal('hero-btnPrimary', c.btnPrimary);
+                        setVal('hero-btnPrimaryEn', c.btnPrimaryEn);
+                        setVal('hero-btnSecondary', c.btnSecondary);
+                        setVal('hero-btnSecondaryEn', c.btnSecondaryEn);
+                    } else if (s.key === 'about') {
+                        setVal('about-text1', c.text1);
+                        setVal('about-text1En', c.text1En);
+                        setVal('about-text2', c.text2);
+                        setVal('about-text2En', c.text2En);
+                        setVal('about-text3', c.text3);
+                        setVal('about-text3En', c.text3En);
+                        setVal('about-image', c.image);
+                    } else if (s.key === 'contact') {
+                        setVal('contact-email', c.email);
+                        setVal('contact-whatsapp', c.whatsapp);
+                        setVal('contact-telegram', c.telegram);
+                        setVal('contact-youtube', c.youtube);
+                        setVal('contact-formAction', c.formAction);
+                    }
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function setVal(id, val) {
+            const el = document.getElementById(id);
+            if (el && val !== undefined) el.value = val;
+        }
+
+        function getVal(id) {
+            const el = document.getElementById(id);
+            return el ? el.value : '';
+        }
+
+        async function saveSection(key) {
+            let content = {};
+            if (key === 'hero') {
+                content = {
+                    title: getVal('hero-title'), titleEn: getVal('hero-titleEn'),
+                    subtitle: getVal('hero-subtitle'), subtitleEn: getVal('hero-subtitleEn'),
+                    description: getVal('hero-description'), descriptionEn: getVal('hero-descriptionEn'),
+                    btnPrimary: getVal('hero-btnPrimary'), btnPrimaryEn: getVal('hero-btnPrimaryEn'),
+                    btnSecondary: getVal('hero-btnSecondary'), btnSecondaryEn: getVal('hero-btnSecondaryEn')
+                };
+            } else if (key === 'about') {
+                content = {
+                    text1: getVal('about-text1'), text1En: getVal('about-text1En'),
+                    text2: getVal('about-text2'), text2En: getVal('about-text2En'),
+                    text3: getVal('about-text3'), text3En: getVal('about-text3En'),
+                    image: getVal('about-image')
+                };
+            } else if (key === 'contact') {
+                content = {
+                    email: getVal('contact-email'), whatsapp: getVal('contact-whatsapp'),
+                    telegram: getVal('contact-telegram'), youtube: getVal('contact-youtube'),
+                    formAction: getVal('contact-formAction')
+                };
+            }
+
+            try {
+                await apiPut(`/api/sections/${key}`, { content });
+                showToast('تم حفظ التعديلات بنجاح');
+            } catch (err) {
+                showToast('حدث خطأ في الحفظ', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

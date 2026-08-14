@@ -1,460 +1,209 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light">
-
+<html lang="en" dir="ltr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="البورتفوليو الشخصي للمهندس محمد - مؤسس منصة كود التطور. خدمات برمجية، تصميم مواقع، وحلول تقنية متكاملة.">
-    <meta name="keywords" content="مهندس برمجيات, تصميم مواقع, كود التطور, html, css, javascript, frontend developer, محمد">
-    <meta name="author" content="Mohammad">
-
-    <!-- Open Graph (Facebook/LinkedIn) -->
-    <meta property="og:title" content="المهندس محمد | Portfolio">
-    <meta property="og:description" content="مهندس واجهات ومطور برمجيات. حول أفكارك إلى واقع رقمي مبهر.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://code-elta6ur.com/">
-    <!-- Update with actual URL if known -->
-    <meta property="og:image" content="assets/og-image.jpg">
-
-    <title>محمد | مهندس برمجيات</title>
-
-    <!-- Fonts -->
+    <meta name="description" content="Personal Portfolio of Engineer Mohammad Abu Khashrif - Founder of Code Evolution.">
+    <title>Mohammad | Software Engineer</title>
+    
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
+    
+    <!-- Icons (Phosphor Icons for a clean, modern look) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- GSAP & Lenis for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.32/dist/lenis.min.js"></script>
 </head>
-
 <body>
 
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader"></div>
-        <div class="loading-text">كود التطور</div>
+    <div class="loader-wrapper" id="loader">
+        <div class="loader-text">MOHAMMAD</div>
     </div>
 
     <!-- Header / Navbar -->
-    <header>
-        <div class="nav-container">
-            <div class="logo">محمد</div>
-
-            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="القائمة">☰</button>
-
-            <nav>
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#services">خدماتي</a></li>
-                    <li><a href="#portfolio">أعمالي</a></li>
-                    <li><a href="#about">من أنا</a></li>
-                    <li><a href="#contact">تواصل معي</a></li>
-                </ul>
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">M.</a>
+            
+            <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="ph ph-list"></i></button>
+            
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" data-i18n="nav.home" style="color:var(--primary)">Home</a>
+                <a href="services.html" data-i18n="nav.services">Services</a>
+                <a href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a>
+                <a href="about.html" data-i18n="nav.about">About</a>
+                <a href="contact.html" data-i18n="nav.contact">Contact</a>
+                <a href="where-to-find-me.html" data-i18n="nav.findMe">Where to Find Me</a>
             </nav>
-
+            
             <div class="nav-controls">
-                <button id="theme-toggle" class="theme-toggle" title="تغيير المظهر">🌙</button>
-                <a href="en.html" class="lang-switch" title="English">EN</a>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme"><i class="ph ph-moon"></i></button>
+                <button class="icon-btn lang-switch" aria-label="Switch Language">AR</button>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container hero-content hidden-el">
-            <h1>أهلاً، أنا <span style="color:var(--primary-color)">محمد</span></h1>
-            <h2>مهندس برمجيات ومطور واجهات مستخدم</h2>
-            <p>مؤسس منصة وقناة "كود التطور". أحول الأفكار المعقدة إلى تجارب رقمية سلسة، سريعة، وجميلة.</p>
+    <section class="hero">
+        <div class="bg-gradient-1"></div>
+        <div class="bg-gradient-2"></div>
+        
+        <div class="container hero-content gsap-reveal">
+            <div class="hero-subtitle" data-i18n="hero.greeting">Hello, I'm</div>
+            <h1 class="title-xl hero-title mb-4">
+                <span data-i18n="hero.name">Mohammad Abu Khashrif</span>
+            </h1>
+            <h2 class="title-md mb-4" data-i18n="hero.title">Software Engineer & Full Stack Developer</h2>
+            
+            <p class="hero-desc" data-i18n="hero.subtitle">
+                Founder of "Code Evolution". I turn complex ideas into seamless, fast, and beautiful digital experiences.
+            </p>
+            
             <div class="hero-btns">
-                <a href="#contact" class="btn btn-primary">اطلب خدمتك</a>
-                <a href="#portfolio" class="btn btn-outline">شاهد أعمالي</a>
+                <a href="contact.html" class="btn btn-primary" data-i18n="hero.requestService">Request Service</a>
+                <a href="portfolio.html" class="btn btn-outline" data-i18n="hero.myWork">My Work</a>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
+    <!-- Main Previews -->
+    <section class="section pt-150">
         <div class="container">
-            <h3 class="section-title hidden-el"><span>خدماتي</span> التقنية</h3>
-            <div class="services-grid">
+            <div class="grid-3">
+                <!-- Portfolio Preview -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-briefcase"></i></div>
+                    <h3 data-i18n="previews.portfolioTitle">Portfolio</h3>
+                    <p data-i18n="previews.portfolioDesc" class="mb-4 text-sm text-secondary">Explore some of my recent work and projects.</p>
+                    <a href="portfolio.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.viewMore">View More</a>
+                </div>
+                
+                <!-- About Me Preview -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-user"></i></div>
+                    <h3 data-i18n="previews.aboutTitle">About Me</h3>
+                    <p data-i18n="previews.aboutDesc" class="mb-4 text-sm text-secondary">Learn more about my background, experience, and skills.</p>
+                    <a href="about.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.viewMore">View More</a>
+                </div>
+                
+                <!-- Services Preview -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-wrench"></i></div>
+                    <h3 data-i18n="previews.servicesTitle">Services</h3>
+                    <p data-i18n="previews.servicesDesc" class="mb-4 text-sm text-secondary">Professional technical solutions to build your digital presence.</p>
+                    <a href="services.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.viewMore">View More</a>
+                </div>
+                
+                <!-- Contact Preview -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-envelope"></i></div>
+                    <h3 data-i18n="previews.contactTitle">Contact</h3>
+                    <p data-i18n="previews.contactDesc" class="mb-4 text-sm text-secondary">Get in touch for business inquiries and collaborations.</p>
+                    <a href="contact.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.viewMore">View More</a>
+                </div>
+                
+                <!-- Find Me Preview -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-map-pin"></i></div>
+                    <h3 data-i18n="previews.findMeTitle">Where to Find Me</h3>
+                    <p data-i18n="previews.findMeDesc" class="mb-4 text-sm text-secondary">Connect with me on freelance platforms and social media.</p>
+                    <a href="where-to-find-me.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.viewMore">View More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Services Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header gsap-reveal mb-12 text-center">
+                <h2 class="title-lg mb-4"><span data-i18n="previews.featuredServices">Featured Services</span></h2>
+            </div>
+            
+            <div class="grid-3">
                 <!-- Service 1 -->
-                <div class="service-card hidden-el">
-                    <div class="service-icon">💻</div>
-                    <h4>برمجة الواجهات</h4>
-                    <p>تصميم وتطوير واجهات مستخدم عصرية باستخدام أحدث التقنيات (HTML5, CSS3, JS) مع ضمان التجاوب والسرعة.</p>
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-wrench"></i></div>
+                    <h3 data-i18n="services.s1Title">Blogger Troubleshooting</h3>
+                    <p data-i18n="services.s1Desc" class="mb-4 text-sm text-secondary">Expert in diagnosing and fixing all Blogger technical issues quickly and professionally.</p>
+                    <a href="services.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.learnMore">Learn More</a>
                 </div>
+                
                 <!-- Service 2 -->
-                <div class="service-card hidden-el">
-                    <div class="service-icon">📝</div>
-                    <h4>تطوير بلوجر</h4>
-                    <p>تركيب وتعديل قوالب بلوجر، تحسين المظهر، وضبط الأكواد للحصول على أداء مثالي.</p>
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-layout"></i></div>
+                    <h3 data-i18n="services.s2Title">Complete Blogger Setup</h3>
+                    <p data-i18n="services.s2Desc" class="mb-4 text-sm text-secondary">A professional blog ready to earn from day one.</p>
+                    <a href="services.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.learnMore">Learn More</a>
                 </div>
+                
                 <!-- Service 3 -->
-                <div class="service-card hidden-el">
-                    <div class="service-icon">🌐</div>
-                    <h4>ووردبريس</h4>
-                    <p>إنشاء وإدارة مواقع ووردبريس، متاجر إلكترونية، ومنصات تعليمية باحترافية عالية.</p>
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-paint-brush"></i></div>
+                    <h3 data-i18n="services.s3Title">Template Customization</h3>
+                    <p data-i18n="services.s3Desc" class="mb-4 text-sm text-secondary">Customize templates to perfectly match your brand and requirements.</p>
+                    <a href="services.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.learnMore">Learn More</a>
                 </div>
+                
                 <!-- Service 4 -->
-                <div class="service-card hidden-el">
-                    <div class="service-icon">🚀</div>
-                    <h4>SEO وسرعة</h4>
-                    <p>تحسين محركات البحث وزيادة سرعة تحميل الصفحات لضمان تجربة مستخدم مميزة وتصدر النتائج.</p>
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-code"></i></div>
+                    <h3 data-i18n="services.s4Title">Professional Web Design</h3>
+                    <p data-i18n="services.s4Desc" class="mb-4 text-sm text-secondary">A modern website that reflects your identity and achieves your digital goals.</p>
+                    <a href="services.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.learnMore">Learn More</a>
                 </div>
+                
                 <!-- Service 5 -->
-                <div class="service-card hidden-el">
-                    <div class="service-icon">🛡️</div>
-                    <h4>استشارات وأمان</h4>
-                    <p>تقديم حلول تقنية للمشاكل البرمجية وتأمين المواقع وحمايتها من الثغرات.</p>
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-wordpress-logo"></i></div>
+                    <h3 data-i18n="services.s5Title">Professional WordPress Site</h3>
+                    <p data-i18n="services.s5Desc" class="mb-4 text-sm text-secondary">A complete WordPress site ready to work from day one.</p>
+                    <a href="services.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.learnMore">Learn More</a>
                 </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-browser"></i></div>
+                    <h3 data-i18n="services.s6Title">Landing Page Development</h3>
+                    <p data-i18n="services.s6Desc" class="mb-4 text-sm text-secondary">Create a professional, fast, and responsive landing page to boost conversions.</p>
+                    <a href="services.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.learnMore">Learn More</a>
+                </div>
+                
+                <!-- Service 7 (Consultation) -->
+                <div class="service-card glass-panel gsap-reveal" style="border: 1px solid var(--primary);">
+                    <div class="service-icon" style="background: var(--primary); color: white;"><i class="ph ph-lightbulb"></i></div>
+                    <h3 data-i18n="services.s7Title">Consultation</h3>
+                    <p data-i18n="services.s7Desc" class="mb-4 text-sm text-secondary">Book a one-on-one consultation to discuss your project, architecture, technology stack, database design, code review, performance optimization, AI integration, or any software development topic.</p>
+                    <a href="services.html" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="previews.learnMore">Learn More</a>
+                </div>
+                
             </div>
         </div>
     </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h3 class="section-title hidden-el">معرض <span>أعمالي</span></h3>
-
-            <!-- Filters -->
-            <div class="portfolio-filters hidden-el">
-                <button class="filter-btn active" data-filter="all">الكل</button>
-                <button class="filter-btn" data-filter="frontend">Frontend</button>
-                <button class="filter-btn" data-filter="blogger">Blogger</button>
-                <button class="filter-btn" data-filter="wordpress">Wordpress</button>
-            </div>
-
-            <div class="portfolio-grid">
-                <!-- ================= FRONTEND ================= -->
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/comprehensive-budget-management/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/Budget App.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">تطبيق إدارة الميزانية</div>
-                            <div class="portfolio-tags"><span>Frontend</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/alzaim" target="_blank">
-                        <div class="portfolio-img"><img src="/img/Alzaim.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">موقع توصيل الزعيم</div>
-                            <div class="portfolio-tags"><span>Frontend</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/Flash-crypto" target="_blank">
-                        <div class="portfolio-img"><img src="/img/Flash-crypto.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">فلاش كريبتو</div>
-                            <div class="portfolio-tags"><span>Frontend</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/dashboard" target="_blank">
-                        <div class="portfolio-img"><img src="/img/Dashboard.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">داشبورد عصري</div>
-                            <div class="portfolio-tags"><span>UI/UX</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/lugx-gaming" target="_blank">
-                        <div class="portfolio-img"><img src="/img/ugx-gaming.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">موقع ألعاب Lugx</div>
-                            <div class="portfolio-tags"><span>Frontend</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/Code-Timer-Tracker/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/Code-Timer-Tracker.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">متتبع وقت الكود</div>
-                            <div class="portfolio-tags"><span>Tool</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/To-Do-List/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/o-Do-List.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">قائمة المهام</div>
-                            <div class="portfolio-tags"><span>App</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/countdown-Timer/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/countdown-Timer.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">مؤقت عكسي</div>
-                            <div class="portfolio-tags"><span>Tool</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/codeq/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/codeq.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">كود كيو</div>
-                            <div class="portfolio-tags"><span>Tool</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/code" target="_blank">
-                        <div class="portfolio-img"><img src="/img/code.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">تصميم موقع كامل</div>
-                            <div class="portfolio-tags"><span>Design</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item frontend hidden-el">
-                    <a href="https://syrmoha.github.io/DoctorLine/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/DoctorLine.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">دكتور لاين</div>
-                            <div class="portfolio-tags"><span>Medical</span></div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- ================= BLOGGER ================= -->
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://www.waseem-tech.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/waseem-tech.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">مدونة وسيم تيك</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://www.abdelrahman-academy.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/abdelrahman.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">عبد الرحمن أكاديمي</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://www.msar25.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/msar25.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">محمد سالم بن رباع</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://www.departureticket.com/" target="_blank">
-                        <div class="portfolio-img"><span>Departure Ticket</span></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">بوصلة المسافر</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://www.f-2025.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/f2025.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">مدونة الرياضة</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://europa-heute.blogspot.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/europa.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">أوروبا اليوم</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://aliraqbasra.blogspot.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/aliraqbasra.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">مدونة العراق</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://apppikiapps.blogspot.com/" target="_blank">
-                        <div class="portfolio-img"><span>Apppiki</span></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">مدونة أبيكي</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://arabgameings.blogspot.com/" target="_blank">
-                        <div class="portfolio-img"><span>Arab Games</span></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">عرب جيمز</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item blogger hidden-el">
-                    <a href="https://wastmral5abr.blogspot.com/" target="_blank">
-                        <div class="portfolio-img"><span>News Blog</span></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">ويستمر الخبر</div>
-                            <div class="portfolio-tags"><span>Blogger</span></div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- ================= WORDPRESS ================= -->
-                <div class="portfolio-item wordpress hidden-el">
-                    <a href="https://code-elta6ur.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/code elta6ur.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">منصة كود التطور</div>
-                            <div class="portfolio-tags"><span>Wordpress</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item wordpress hidden-el">
-                    <a href="https://sihtitaj.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/sihtitaj.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">صحتي تاج</div>
-                            <div class="portfolio-tags"><span>Wordpress</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item wordpress hidden-el">
-                    <a href="https://alons-safr88.com" target="_blank">
-                        <div class="portfolio-img"><img src="/img/alons.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">سياحة وسفر</div>
-                            <div class="portfolio-tags"><span>Wordpress</span></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="portfolio-item wordpress hidden-el">
-                    <a href="https://sougroumia.com/" target="_blank">
-                        <div class="portfolio-img"><img src="/img/sougroumia.png" alt=""></div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-title">سوق الرومية</div>
-                            <div class="portfolio-tags"><span>Store</span></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Khamsat Link -->
-            <div style="text-align: center; margin-top: 40px;" class="hidden-el">
-                <a href="https://khamsat.com/user/syr_moha" target="_blank" class="btn btn-outline" style="border-radius: 8px;">
-                    شاهد المزيد على خمسات
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h3 class="section-title hidden-el">من <span>أنا</span></h3>
-            <div class="about-content hidden-el">
-                <div class="about-text">
-                    <p>أنا محمد، مهندس برمجيات ومؤسس منصة "كود التطور". شغفي هو التكنولوجيا وكيف يمكنها تسهيل حياتنا.</p>
-                    <p>أمتلك خبرة واسعة في تطوير الواجهات الأمامية (Frontend) وإدارة أنظمة المحتوى (Blogger & Wordpress). أهتم بأدق التفاصيل، من نظافة الكود إلى جمالية التصميم وسرعة الأداء.</p>
-                    <p>هدفي هو تمكين الأفراد والشركات من التواجد الرقمي القوي من خلال حلول تقنية مبتكرة.</p>
-
-                    <div class="social-links">
-                        <a href="https://www.youtube.com/@code-elta6ur" title="YouTube" target="_blank" class="social-link"><i class="fa-brands fa-youtube"></i></a>
-                        <!-- Youtube Icon -->
-                        <a href="https://khamsat.com/user/syr_moha" title="Khamsat" target="_blank" class="social-link"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nys1NzU3Nzc3NzcrNjc3Nzc3Nzc2Nzc3Nzc3Nf/AABEIABwAHAMBEQACEQEDEQH/xAAZAAEAAwEBAAAAAAAAAAAAAAAGAQQFAwD/xAAqEAACAQMCBQEJAAAAAAAAAAABAgMABBEFEgYTMVFhcSEiI0FSgZGhsf/EABsBAAICAwEAAAAAAAAAAAAAAAQFAAMBAgYH/8QAJBEAAQQBAgcBAQAAAAAAAAAAAQACAxEEEkEFITFRYYHBoRP/2gAMAwEAAhEDEQA/AF00whhklbJVFLHHYDNectaXODRuulJoWjsfG2nyRyuILnESBj7o6FlXv3YU2dwXIa4NJHPz4J+IMZ0RBNFaWia5b6yszW0cqcogHmADOc+fFCZmDJiEB5HPsroZ2zXp2WnuoJXqpe7pLO4RBlmiYAdyQa3icBI0nuFh4tpAQnQri+WxuLfR7OO5SEZ5rqPiOXXIGSPZjcR6D0rps5kJlbJkvLb2Gwo/t0CleO5+gtibdb+0j4b1hNRjmje2W2uoCBLGq4Hzwf0aT8Rw3YxadWpp6FG40wlBFUR1WzupaiaVd3wjE+0Y6VB1WxRaw4hjt7WUWehyQKihxGrEBiWVfp85+1P8jhkskjf6zgk8r9E/EtjymtadEZCtcL2l2txeanfJypLojbH0wO/8/FUcUyIdEeNEbDN1biRP1OleKtId3mkyOpcs1FlTuPesKKM1lRezUUX/2Q=="
-                                alt=""></a>
-                        <!-- Khamsat Text/Icon -->
-                        <a href="mailto:qaseemmohammad60@gmail.com" title="Email" class="social-link"><i class="fa-solid fa-message"></i></a>
-                    </div>
-                </div>
-                <!-- Optional: Add a profile image if available -->
-                <div class="about-img" style="background:var(--bg-card); height:300px; border-radius:15px; display:flex; align-items:center; justify-content:center;">
-                    <img src="/img/me.png" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container contact-wrapper hidden-el">
-            <h3 class="section-title">تواصل <span>معي</span></h3>
-
-            <form action="https://formspree.io/f/mqakjvzj" method="POST" class="contact-form">
-                <p style="text-align:center; margin-bottom:20px; color:var(--text-muted);">
-                    يمكنك مراسلتي عبر النموذج أدناه أو خيارات التواصل الأخرى.
-                </p>
-
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="الاسم" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="رسالتك..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الرسالة</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Floating Action Button -->
-    <div class="fab-container">
-        <button class="fab-main" id="fab-main" aria-label="Contact Me">
-            💬
-        </button>
-        <div class="fab-menu">
-            <a href="https://iwtsp.com/963983769230" target="_blank" class="fab-item fab-whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="https://t.me/mo_a_kashreef" target="_blank" class="fab-item fab-telegram" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-            <a href="mailto:qaseemmohammad60@gmail.com" class="fab-item fab-email" aria-label="Email"><i class="fa-solid fa-message"></i></a>
-        </div>
-    </div>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>جميع الحقوق محفوظة &copy; 2025 المهندس محمد - كود التطور</p>
+            <p data-i18n="footer.rights">All Rights Reserved © 2025 Mohammad Abu Khashrif - Code Evolution</p>
         </div>
     </footer>
 
     <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/translations.js?v=2"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/script.js"></script>
-    <script>
-        // Optional: Simple Form Handler for static usage if Formspree isn't used
-        const form = document.querySelector('.contact-form');
-        form.addEventListener('submit', (e) => {
-            // Note: If you don't have a backend, this form won't actually "send" email without a service.
-            // I added a generic Formspree placeholder in the action attribute.
-            // For now, let's allow the default submit which might fail or do nothing on static.
-            // A better approach for "static only" is mailto:
-            if (!form.getAttribute('action').includes('formspree')) {
-                e.preventDefault();
-                const name = form.querySelector('[name="name"]').value;
-                const body = form.querySelector('[name="message"]').value;
-                window.location.href = `mailto:qaseemmohammad60@gmail.com?subject=رسالة من موقعك الشخصي (من ${name})&body=${body}`;
-            }
-        });
-    </script>
-    <script src="https://kit.fontawesome.com/583c8bcef0.js" crossorigin="anonymous"></script>
 </body>
-
 </html>

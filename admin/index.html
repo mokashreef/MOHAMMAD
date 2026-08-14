@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | الرئيسية</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ محمد CMS</h2>
+                <span>نظام إدارة المحتوى</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="active"><span class="nav-icon">📊</span> الرئيسية</a>
+                <a href="projects.html"><span class="nav-icon">📁</span> المشاريع</a>
+                <a href="categories.html"><span class="nav-icon">🏷️</span> التصنيفات</a>
+                <a href="sections.html"><span class="nav-icon">📝</span> أقسام الموقع</a>
+                <a href="media.html"><span class="nav-icon">🖼️</span> الصور</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/" target="_blank" class="visit-site">🌐 زيارة الموقع</a>
+                <button class="logout-btn" onclick="logout()">🚪 تسجيل الخروج</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="main-header">
+                <h1>📊 لوحة التحكم</h1>
+                <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid" id="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon projects">📁</div>
+                    <div class="stat-info">
+                        <h3 id="projects-count">0</h3>
+                        <p>المشاريع</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon categories">🏷️</div>
+                    <div class="stat-info">
+                        <h3 id="categories-count">0</h3>
+                        <p>التصنيفات</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon images">🖼️</div>
+                    <div class="stat-info">
+                        <h3 id="images-count">0</h3>
+                        <p>الصور المرفوعة</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon sections">📄</div>
+                    <div class="stat-info">
+                        <h3 id="sections-count">0</h3>
+                        <p>الأقسام</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Projects -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>آخر المشاريع</h2>
+                    <a href="projects.html" class="btn btn-outline btn-sm">عرض الكل</a>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الصورة</th>
+                                <th>العنوان</th>
+                                <th>التصنيف</th>
+                                <th>التاريخ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-projects"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        checkAuth();
+        loadDashboard();
+
+        async function loadDashboard() {
+            try {
+                const [projects, categories, sections, uploads] = await Promise.all([
+                    apiGet('/api/projects'),
+                    apiGet('/api/categories'),
+                    apiGet('/api/sections'),
+                    apiGet('/api/uploads')
+                ]);
+
+                document.getElementById('projects-count').textContent = projects.length;
+                document.getElementById('categories-count').textContent = categories.length;
+                document.getElementById('sections-count').textContent = sections.length;
+                document.getElementById('images-count').textContent = uploads.length;
+
+                // Recent projects (last 5)
+                const recent = projects.slice(0, 5);
+                const tbody = document.getElementById('recent-projects');
+                if (recent.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--admin-text-muted);">لا توجد مشاريع بعد</td></tr>';
+                } else {
+                    tbody.innerHTML = recent.map(p => `
+                        <tr>
+                            <td>${p.image ? `<img src="${p.image}" alt="">` : '<span style="color:var(--admin-text-muted)">—</span>'}</td>
+                            <td>${p.title}</td>
+                            <td><span style="background:var(--admin-primary);color:#fff;padding:3px 10px;border-radius:20px;font-size:0.75rem;">${p.category?.name || '—'}</span></td>
+                            <td style="color:var(--admin-text-muted);font-size:0.85rem;">${new Date(p.createdAt).toLocaleDateString('ar-EG')}</td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (err) {
+                console.error('Dashboard load error:', err);
+            }
+        }
+    </script>
+</body>
+</html>

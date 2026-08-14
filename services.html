@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Mohammad</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.32/dist/lenis.min.js"></script>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">M.</a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="ph ph-list"></i></button>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" data-i18n="nav.home">Home</a>
+                <a href="services.html" data-i18n="nav.services" style="color:var(--primary)">Services</a>
+                <a href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a>
+                <a href="about.html" data-i18n="nav.about">About</a>
+                <a href="contact.html" data-i18n="nav.contact">Contact</a>
+                <a href="where-to-find-me.html" data-i18n="nav.findMe">Where to Find Me</a>
+            </nav>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="icon-btn"><i class="ph ph-moon"></i></button>
+                <button class="icon-btn lang-switch">AR</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="section pt-150">
+        <div class="bg-gradient-1" style="top:20%; left:50%;"></div>
+        <div class="container">
+            <div class="section-header gsap-reveal mb-12 text-center">
+                <h1 class="title-xl mb-4"><span data-i18n="services.title">My </span><span style="color:var(--primary)" data-i18n="services.titleSpan">Services</span></h1>
+                <p data-i18n="services.subtitle" style="font-size: 1.15rem; color:var(--text-secondary); max-width: 600px; margin: 0 auto;">Professional technical solutions to build your digital presence with confidence</p>
+            </div>
+            
+            <div class="grid-3">
+                <!-- Service 1 -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-wrench"></i></div>
+                    <h3 data-i18n="services.s1Title">Blogger Troubleshooting</h3>
+                    <p data-i18n="services.s1Desc" class="mb-4 text-sm text-secondary">Expert in diagnosing and fixing all Blogger technical issues quickly and professionally.</p>
+                    <a href="https://khamsat.com/programming/blogger/2584108" target="_blank" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="services.orderNow">Order Now</a>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-layout"></i></div>
+                    <h3 data-i18n="services.s2Title">Complete Blogger Setup</h3>
+                    <p data-i18n="services.s2Desc" class="mb-4 text-sm text-secondary">A professional blog ready to earn from day one.</p>
+                    <a href="https://khamsat.com/programming/blogger/2777883" target="_blank" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="services.orderNow">Order Now</a>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-paint-brush"></i></div>
+                    <h3 data-i18n="services.s3Title">Template Customization</h3>
+                    <p data-i18n="services.s3Desc" class="mb-4 text-sm text-secondary">Customize templates to perfectly match your brand and requirements.</p>
+                    <a href="https://khamsat.com/programming/blogger/2596275" target="_blank" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="services.orderNow">Order Now</a>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-code"></i></div>
+                    <h3 data-i18n="services.s4Title">Professional Web Design</h3>
+                    <p data-i18n="services.s4Desc" class="mb-4 text-sm text-secondary">A modern website that reflects your identity and achieves your digital goals.</p>
+                    <a href="https://khamsat.com/programming/custom-website-development/2562965" target="_blank" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="services.orderNow">Order Now</a>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-wordpress-logo"></i></div>
+                    <h3 data-i18n="services.s5Title">Professional WordPress Site</h3>
+                    <p data-i18n="services.s5Desc" class="mb-4 text-sm text-secondary">A complete WordPress site ready to work from day one.</p>
+                    <a href="https://khamsat.com/programming/wordpress-website-creation/2811238" target="_blank" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="services.orderNow">Order Now</a>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card glass-panel gsap-reveal">
+                    <div class="service-icon"><i class="ph ph-browser"></i></div>
+                    <h3 data-i18n="services.s6Title">Landing Page Development</h3>
+                    <p data-i18n="services.s6Desc" class="mb-4 text-sm text-secondary">Create a professional, fast, and responsive landing page to boost conversions.</p>
+                    <a href="https://khamsat.com/programming/landing-page-development/4175820" target="_blank" class="btn btn-outline w-full text-center" style="display: block; margin-top: auto;" data-i18n="services.orderNow">Order Now</a>
+                </div>
+                
+                <!-- Service 7 (Consultation) -->
+                <div class="service-card glass-panel gsap-reveal" style="border: 1px solid var(--primary);">
+                    <div class="service-icon" style="background: var(--primary); color: white;"><i class="ph ph-lightbulb"></i></div>
+                    <h3 data-i18n="services.s7Title">Consultation</h3>
+                    <p data-i18n="services.s7Desc" class="mb-4 text-sm text-secondary">Book a one-on-one consultation to discuss your project, architecture, technology stack, database design, code review, performance optimization, AI integration, or any software development topic.</p>
+                    <a href="contact.html" class="btn btn-primary w-full text-center" style="display: block; margin-top: auto;" data-i18n="services.contactMe">Contact Me</a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer.rights">All Rights Reserved © 2025 Mohammad Abu Khashrif - Code Evolution</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/translations.js?v=2"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

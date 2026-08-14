@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة التصنيفات | لوحة التحكم</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ محمد CMS</h2>
+                <span>نظام إدارة المحتوى</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><span class="nav-icon">📊</span> الرئيسية</a>
+                <a href="projects.html"><span class="nav-icon">📁</span> المشاريع</a>
+                <a href="categories.html" class="active"><span class="nav-icon">🏷️</span> التصنيفات</a>
+                <a href="sections.html"><span class="nav-icon">📝</span> أقسام الموقع</a>
+                <a href="media.html"><span class="nav-icon">🖼️</span> الصور</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/" target="_blank" class="visit-site">🌐 زيارة الموقع</a>
+                <button class="logout-btn" onclick="logout()">🚪 تسجيل الخروج</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="main-header">
+                <h1>🏷️ إدارة التصنيفات</h1>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <button class="btn btn-primary" onclick="openAddModal()">➕ إضافة تصنيف</button>
+                    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الاسم (عربي)</th>
+                                <th>الاسم (English)</th>
+                                <th>Slug</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categories-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="category-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">إضافة تصنيف</h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="category-form">
+                    <input type="hidden" id="cat-id">
+                    <div class="form-group">
+                        <label>اسم التصنيف (عربي)</label>
+                        <input type="text" id="cat-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>اسم التصنيف (English)</label>
+                        <input type="text" id="cat-nameEn" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Slug (معرف فريد بالإنجليزية)</label>
+                        <input type="text" id="cat-slug" required placeholder="مثال: frontend">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal()">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveCategory()">💾 حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        checkAuth();
+        loadCategories();
+
+        async function loadCategories() {
+            const categories = await apiGet('/api/categories');
+            const tbody = document.getElementById('categories-table');
+
+            if (categories.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🏷️</div><p>لا توجد تصنيفات بعد</p></div></td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = categories.map(c => `
+                <tr>
+                    <td><strong>${c.name}</strong></td>
+                    <td style="color:var(--admin-text-muted)">${c.nameEn}</td>
+                    <td><code style="background:var(--admin-input-bg);padding:3px 10px;border-radius:6px;font-size:0.85rem;">${c.slug}</code></td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn btn-outline btn-sm" onclick='editCategory(${JSON.stringify(c)})'>✏️</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteCategory('${c._id}')">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openAddModal() {
+            document.getElementById('modal-title').textContent = 'إضافة تصنيف جديد';
+            document.getElementById('cat-id').value = '';
+            document.getElementById('category-form').reset();
+            document.getElementById('category-modal').classList.add('active');
+        }
+
+        function editCategory(c) {
+            document.getElementById('modal-title').textContent = 'تعديل التصنيف';
+            document.getElementById('cat-id').value = c._id;
+            document.getElementById('cat-name').value = c.name;
+            document.getElementById('cat-nameEn').value = c.nameEn;
+            document.getElementById('cat-slug').value = c.slug;
+            document.getElementById('category-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('category-modal').classList.remove('active');
+        }
+
+        async function saveCategory() {
+            const id = document.getElementById('cat-id').value;
+            const data = {
+                name: document.getElementById('cat-name').value,
+                nameEn: document.getElementById('cat-nameEn').value,
+                slug: document.getElementById('cat-slug').value
+            };
+
+            if (!data.name || !data.nameEn || !data.slug) {
+                showToast('يرجى ملء جميع الحقول', 'error');
+                return;
+            }
+
+            try {
+                if (id) {
+                    await apiPut(`/api/categories/${id}`, data);
+                    showToast('تم تحديث التصنيف بنجاح');
+                } else {
+                    await apiPost('/api/categories', data);
+                    showToast('تم إضافة التصنيف بنجاح');
+                }
+                closeModal();
+                loadCategories();
+            } catch (err) {
+                showToast('حدث خطأ: ' + err.message, 'error');
+            }
+        }
+
+        async function deleteCategory(id) {
+            if (!confirm('هل أنت متأكد من حذف هذا التصنيف؟')) return;
+            try {
+                await apiDelete(`/api/categories/${id}`);
+                showToast('تم حذف التصنيف');
+                loadCategories();
+            } catch (err) {
+                showToast('حدث خطأ في الحذف', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المشاريع | لوحة التحكم</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>⚡ محمد CMS</h2>
+                <span>نظام إدارة المحتوى</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html"><span class="nav-icon">📊</span> الرئيسية</a>
+                <a href="projects.html" class="active"><span class="nav-icon">📁</span> المشاريع</a>
+                <a href="categories.html"><span class="nav-icon">🏷️</span> التصنيفات</a>
+                <a href="sections.html"><span class="nav-icon">📝</span> أقسام الموقع</a>
+                <a href="media.html"><span class="nav-icon">🖼️</span> الصور</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/" target="_blank" class="visit-site">🌐 زيارة الموقع</a>
+                <button class="logout-btn" onclick="logout()">🚪 تسجيل الخروج</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="main-header">
+                <h1>📁 إدارة المشاريع</h1>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <button class="btn btn-primary" onclick="openAddModal()">➕ إضافة مشروع</button>
+                    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>الصورة</th>
+                                <th>العنوان</th>
+                                <th>العنوان (EN)</th>
+                                <th>التصنيف</th>
+                                <th>الترتيب</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projects-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">إضافة مشروع</h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="project-form">
+                    <input type="hidden" id="project-id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>عنوان المشروع (عربي)</label>
+                            <input type="text" id="p-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label>عنوان المشروع (English)</label>
+                            <input type="text" id="p-titleEn">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>وصف المشروع (عربي)</label>
+                            <textarea id="p-description"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>وصف المشروع (English)</label>
+                            <textarea id="p-descriptionEn"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>رابط الصورة</label>
+                            <input type="text" id="p-image" placeholder="/img/project.png أو /uploads/image.png">
+                        </div>
+                        <div class="form-group">
+                            <label>رابط المشروع</label>
+                            <input type="url" id="p-link" placeholder="https://example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>التصنيف</label>
+                            <select id="p-category" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label>الترتيب</label>
+                            <input type="number" id="p-order" value="0">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeModal()">إلغاء</button>
+                <button class="btn btn-primary" onclick="saveProject()">💾 حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        checkAuth();
+        let categories = [];
+
+        loadPage();
+
+        async function loadPage() {
+            categories = await apiGet('/api/categories');
+            loadCategorySelect();
+            loadProjects();
+        }
+
+        function loadCategorySelect() {
+            const select = document.getElementById('p-category');
+            select.innerHTML = '<option value="">اختر التصنيف</option>' +
+                categories.map(c => `<option value="${c._id}">${c.name}</option>`).join('');
+        }
+
+        async function loadProjects() {
+            const projects = await apiGet('/api/projects');
+            const tbody = document.getElementById('projects-table');
+
+            if (projects.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><div class="empty-icon">📁</div><p>لا توجد مشاريع بعد</p><button class="btn btn-primary" onclick="openAddModal()">➕ أضف أول مشروع</button></div></td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = projects.map(p => `
+                <tr>
+                    <td>${p.image ? `<img src="${p.image}" alt="">` : '—'}</td>
+                    <td><strong>${p.title}</strong></td>
+                    <td style="color:var(--admin-text-muted)">${p.titleEn || '—'}</td>
+                    <td><span style="background:var(--admin-primary);color:#fff;padding:3px 10px;border-radius:20px;font-size:0.75rem;">${p.category?.name || '—'}</span></td>
+                    <td>${p.order}</td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn btn-outline btn-sm" onclick='editProject(${JSON.stringify(p)})'>✏️</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteProject('${p._id}')">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openAddModal() {
+            document.getElementById('modal-title').textContent = 'إضافة مشروع جديد';
+            document.getElementById('project-id').value = '';
+            document.getElementById('project-form').reset();
+            document.getElementById('project-modal').classList.add('active');
+        }
+
+        function editProject(p) {
+            document.getElementById('modal-title').textContent = 'تعديل المشروع';
+            document.getElementById('project-id').value = p._id;
+            document.getElementById('p-title').value = p.title;
+            document.getElementById('p-titleEn').value = p.titleEn || '';
+            document.getElementById('p-description').value = p.description || '';
+            document.getElementById('p-descriptionEn').value = p.descriptionEn || '';
+            document.getElementById('p-image').value = p.image || '';
+            document.getElementById('p-link').value = p.link || '';
+            document.getElementById('p-category').value = p.category?._id || p.category || '';
+            document.getElementById('p-order').value = p.order || 0;
+            document.getElementById('project-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.remove('active');
+        }
+
+        async function saveProject() {
+            const id = document.getElementById('project-id').value;
+            const data = {
+                title: document.getElementById('p-title').value,
+                titleEn: document.getElementById('p-titleEn').value,
+                description: document.getElementById('p-description').value,
+                descriptionEn: document.getElementById('p-descriptionEn').value,
+                image: document.getElementById('p-image').value,
+                link: document.getElementById('p-link').value,
+                category: document.getElementById('p-category').value,
+                order: parseInt(document.getElementById('p-order').value) || 0
+            };
+
+            if (!data.title || !data.category) {
+                showToast('يرجى ملء العنوان والتصنيف', 'error');
+                return;
+            }
+
+            try {
+                if (id) {
+                    await apiPut(`/api/projects/${id}`, data);
+                    showToast('تم تحديث المشروع بنجاح');
+                } else {
+                    await apiPost('/api/projects', data);
+                    showToast('تم إضافة المشروع بنجاح');
+                }
+                closeModal();
+                loadProjects();
+            } catch (err) {
+                showToast('حدث خطأ: ' + err.message, 'error');
+            }
+        }
+
+        async function deleteProject(id) {
+            if (!confirm('هل أنت متأكد من حذف هذا المشروع؟')) return;
+            try {
+                await apiDelete(`/api/projects/${id}`);
+                showToast('تم حذف المشروع');
+                loadProjects();
+            } catch (err) {
+                showToast('حدث خطأ في الحذف', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where to Find Me | Mohammad</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.32/dist/lenis.min.js"></script>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">M.</a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn"><i class="ph ph-list"></i></button>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" data-i18n="nav.home">Home</a>
+                <a href="services.html" data-i18n="nav.services">Services</a>
+                <a href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a>
+                <a href="about.html" data-i18n="nav.about">About</a>
+                <a href="contact.html" data-i18n="nav.contact">Contact</a>
+                <a href="where-to-find-me.html" data-i18n="nav.findMe" style="color:var(--primary)">Where to Find Me</a>
+            </nav>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="icon-btn"><i class="ph ph-moon"></i></button>
+                <button class="icon-btn lang-switch">AR</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="section pt-150">
+        <div class="bg-gradient-2" style="top:10%; right:10%;"></div>
+        <div class="container">
+            <div class="section-header text-center gsap-reveal" style="align-items:center; text-align:center;">
+                <h1 class="title-lg"><span data-i18n="findMe.title">Where to Find </span><span style="color:var(--primary)" data-i18n="findMe.titleSpan">Me</span></h1>
+                <p data-i18n="findMe.subtitle">Connect with me, view my work, or order my services on these platforms.</p>
+            </div>
+
+            <h2 class="title-md mt-8 mb-4 gsap-reveal" data-i18n="findMe.freelanceTitle" style="text-align:center;">Freelancing Platforms</h2>
+            <div class="grid-3 mb-8">
+                <a href="https://khamsat.com/user/syr_moha" target="_blank" class="platform-card glass-panel gsap-reveal">
+                    <div class="platform-icon" style="color: #2aad6a; background: rgba(42, 173, 106, 0.1);"><i class="ph ph-briefcase"></i></div>
+                    <h3>Khamsat</h3>
+                    <p data-i18n="findMe.khamsatDesc">Micro-services Platform</p>
+                    <span class="platform-link" data-i18n="findMe.visit">Visit Profile &rarr;</span>
+                </a>
+                
+                <a href="https://mostaql.com/u/mohammad_qaseem" target="_blank" class="platform-card glass-panel gsap-reveal">
+                    <div class="platform-icon" style="color: #4f9cf7; background: rgba(79, 156, 247, 0.1);"><i class="ph ph-briefcase"></i></div>
+                    <h3>Mostaql</h3>
+                    <p data-i18n="findMe.mostaqlDesc">Freelancing Platform</p>
+                    <span class="platform-link" data-i18n="findMe.visit">Visit Profile &rarr;</span>
+                </a>
+
+                <a href="https://baaeed.com/u/mohammad06" target="_blank" class="platform-card glass-panel gsap-reveal">
+                    <div class="platform-icon" style="color: #e5553a; background: rgba(229, 85, 58, 0.1);"><i class="ph ph-globe"></i></div>
+                    <h3>Baaeed</h3>
+                    <p data-i18n="findMe.baaeedDesc">Remote Work Platform</p>
+                    <span class="platform-link" data-i18n="findMe.visit">Visit Profile &rarr;</span>
+                </a>
+
+                <a href="https://nafezly.com/u/Mohammadabukashree" target="_blank" class="platform-card glass-panel gsap-reveal">
+                    <div class="platform-icon" style="color: #6c5ce7; background: rgba(108, 92, 231, 0.1);"><i class="ph ph-handshake"></i></div>
+                    <h3>Nafezly</h3>
+                    <p data-i18n="findMe.nafezlyDesc">Arabic Freelancing Platform</p>
+                    <span class="platform-link" data-i18n="findMe.visit">Visit Profile &rarr;</span>
+                </a>
+
+                <a href="https://kafiil.com/u/mohammad_abukashreef" target="_blank" class="platform-card glass-panel gsap-reveal">
+                    <div class="platform-icon" style="color: #00b894; background: rgba(0, 184, 148, 0.1);"><i class="ph ph-medal"></i></div>
+                    <h3>Kafiil</h3>
+                    <p data-i18n="findMe.kafiilDesc">Services & Projects Platform</p>
+                    <span class="platform-link" data-i18n="findMe.visit">Visit Profile &rarr;</span>
+                </a>
+            </div>
+
+            <h2 class="title-md mt-8 mb-4 gsap-reveal" data-i18n="findMe.socialTitle" style="text-align:center;">Social Media & Networks</h2>
+            <div class="grid-3">
+                <a href="https://github.com/mokashreef" target="_blank" class="platform-card glass-panel gsap-reveal">
+                    <div class="platform-icon" style="color: #333; background: rgba(51, 51, 51, 0.1);"><i class="ph ph-github-logo"></i></div>
+                    <h3>GitHub</h3>
+                    <p data-i18n="findMe.githubDesc">Open Source Projects</p>
+                    <span class="platform-link" data-i18n="findMe.visit">Visit Profile &rarr;</span>
+                </a>
+
+                <a href="https://www.youtube.com/@code-elta6ur" target="_blank" class="platform-card glass-panel gsap-reveal">
+                    <div class="platform-icon" style="color: #ff0000; background: rgba(255, 0, 0, 0.1);"><i class="ph ph-youtube-logo"></i></div>
+                    <h3>YouTube</h3>
+                    <p data-i18n="findMe.youtubeDesc">Tech Education & Tutorials</p>
+                    <span class="platform-link" data-i18n="findMe.visit">Visit Profile &rarr;</span>
+                </a>
+
+                <a href="#" target="_blank" class="platform-card glass-panel gsap-reveal">
+                    <div class="platform-icon" style="color: #0e76a8; background: rgba(14, 118, 168, 0.1);"><i class="ph ph-linkedin-logo"></i></div>
+                    <h3>LinkedIn</h3>
+                    <p data-i18n="findMe.linkedinDesc">Professional Network</p>
+                    <span class="platform-link" data-i18n="findMe.visit">Visit Profile &rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer.rights">All Rights Reserved © 2025 Mohammad Abu Khashrif - Code Evolution</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/translations.js?v=2"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

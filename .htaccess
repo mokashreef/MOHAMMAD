@@ -1,0 +1,26 @@
+# Prevent directory listing
+Options -Indexes
+
+# Enable URL rewriting
+RewriteEngine On
+
+# Redirect /api/auth/login to api/auth.php (POST)
+RewriteRule ^api/auth/login$ api/auth.php [L,QSA]
+RewriteRule ^api/auth/me$ api/auth.php [L,QSA]
+
+# API Routes
+RewriteRule ^api/projects/?$ api/projects.php [L,QSA]
+RewriteRule ^api/projects/([^/]+)$ api/projects.php?id=$1 [L,QSA]
+
+RewriteRule ^api/categories/?$ api/categories.php [L,QSA]
+RewriteRule ^api/categories/([^/]+)$ api/categories.php?id=$1 [L,QSA]
+
+RewriteRule ^api/sections/?$ api/sections.php [L,QSA]
+RewriteRule ^api/sections/([^/]+)$ api/sections.php?key=$1 [L,QSA]
+
+RewriteRule ^api/upload/?$ api/upload.php [L,QSA]
+RewriteRule ^api/upload/([^/]+)$ api/upload.php?filename=$1 [L,QSA]
+RewriteRule ^api/uploads/?$ api/uploads.php [L,QSA]
+
+# Serve English page
+RewriteRule ^en/?$ en.html [L]
